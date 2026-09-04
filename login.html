@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar Sesión | Tienda Online</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="funciones/login.js" defer></script>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <h1>Tienda Online</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="productos.html">Productos</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="login.html" class="activo">Login</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="formulario-contenedor">
+
+            <h2>Iniciar Sesión</h2>
+
+            <form id="formLogin" novalidate>
+
+                <div class="campo">
+
+                    <label for="correo">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="ejemplo@gmail.com"
+                        autocomplete="email"
+                    >
+
+                    <small>
+                        Solo se permiten correos Gmail o Duoc.
+                    </small>
+
+                    <p class="error" id="errorCorreo"></p>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="password">Contraseña</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                    >
+
+                    <small>
+                        La contraseña debe tener entre 4 y 10 caracteres.
+                    </small>
+
+                    <p class="error" id="errorPassword"></p>
+
+                </div>
+
+
+                <button type="submit">
+                    Iniciar Sesión
+                </button>
+
+
+                <p id="mensajeLogin"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 Tienda Online</p>
+    </footer>
+
+</body>
+
+</html>
