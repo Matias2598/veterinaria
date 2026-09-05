@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo Usuario | Veterinaria San Marcos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <script src="funciones/nuevo-usuario.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>🐾 Administración Veterinaria San Marcos</h1>
+
+        <nav>
+            <a href="admin-home.html">Inicio</a>
+            <a href="admin-productos.html">Productos</a>
+            <a href="admin-usuarios.html">Usuarios</a>
+            <a href="index.html">Volver a la tienda</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="formulario-contenedor">
+
+            <h2>Crear nuevo usuario</h2>
+
+            <p>Completa los datos para registrar un nuevo usuario.</p>
+
+            <form id="formUsuario" novalidate>
+
+                <div class="campo">
+                    <label for="nombre">Nombre completo</label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Ej: Juan Pérez"
+                    >
+
+                    <p class="error" id="errorNombre"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="correo">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Ej: juan@gmail.com"
+                    >
+
+                    <p class="error" id="errorCorreo"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Ingrese una contraseña"
+                    >
+
+                    <p class="error" id="errorPassword"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="confirmarPassword">
+                        Confirmar contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarPassword"
+                        placeholder="Repita la contraseña"
+                    >
+
+                    <p class="error" id="errorConfirmarPassword"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="rol">Rol del usuario</label>
+
+                    <select id="rol">
+
+                        <option value="">
+                            Seleccione un rol
+                        </option>
+
+                        <option value="cliente">
+                            Cliente
+                        </option>
+
+                        <option value="admin">
+                            Administrador
+                        </option>
+
+                    </select>
+
+                    <p class="error" id="errorRol"></p>
+                </div>
+
+                <button type="submit">
+                    Crear usuario
+                </button>
+
+                <p
+                    id="mensajeUsuario"
+                    class="mensaje-exito"
+                ></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Veterinaria San Marcos</p>
+    </footer>
+
+</body>
+
+</html>

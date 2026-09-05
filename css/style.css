@@ -88,8 +88,8 @@ nav a {
     background-color: #2f7d68;
     color: white;
     text-align: center;
-    padding: 15px 0;
-    position: relative;
+    padding: 0;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
