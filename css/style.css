@@ -35,4 +35,61 @@ nav a {
     border-radius: 8px;
     transition: 0.3s;
 }
+ 
+/*pagina de nosotros */
 
+.hero {
+    text-align: center;
+}
+
+.contenido {
+    display: grid;
+    gap: 20px;
+}
+
+
+/* login */
+
+.formulario-contenedor {
+    max-width: 600px;
+    margin: auto;
+}
+
+
+/* productos */
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+
+/* blog */
+
+.detalle-blog {
+    max-width: 850px;
+    margin: auto;
+}
+
+
+/* formularios */
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+}
+
+/* footer  */
+.footer {
+    background-color: #2f7d68;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
