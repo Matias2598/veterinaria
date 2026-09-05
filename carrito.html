@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras | Veterinaria San Marcos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🐾 Veterinaria San Marcos</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="productos.html">Productos</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html" class="activo">Carrito</a>
+            <a href="login.html">Iniciar sesión</a>
+        </nav>
+    </header>
+    <main>
+        <section class="carrito">
+            <h2>Carrito de Compras</h2>
+            <p id="mensajeVacio" hidden>Tu carrito está vacío. 
+                <a href="productos.html">Ver productos</a>
+            </p>
+            <table id="tablaCarrito">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTablaCarrito"></tbody>
+            </table>
+        </section>
+        <aside class="resumen-carrito">
+            <h3>Resumen del Carrito</h3>
+            <p>Total: <strong id="totalCarrito">$0</strong></p>
+
+            <form id="formCupon">
+                <label for="cupon">Cupón de descuento</label>
+
+                <input type="text" id="cupon"
+                    name="cupon" placeholder="Ingresa tu cupón">
+                <button type="submit">Aplicar</button>
+                <p class="error" id="mensajeCupon"></p>
+
+            </form>
+            <button type="button" id="botonPagar" class="boton">Pagar</button> 
+        </aside>
+    </main>
+    <footer class="footer">
+        <p>© 2026 Veterinaria San Marcos</p>
+    </footer>
+</body>
+</html>
