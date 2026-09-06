@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Panel administrador</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="funciones/funciones.js" defer></script>
+</head>
+<body class="admin-layout">
+    
+    <header class="admin-topbar">
+        <h1 class="admin-logo">🐾 Veterinaria San Marcos</h1>
+    <aside class="admin-sidebar">
+        <nav class="admin-nav">
+            <a href="admin-home.html">Inicio</a>
+            <a href="admin-productos.html" class="activo">Productos</a>
+            <a href="admin-usuarios.html">Usuarios</a>
+        </nav>
+
+        <a href="index.html" class="admin-salir">← Volver a la tienda</a>
+    </aside>
+    </header>
+    <main class="admin-main">
+        <h2>Productos</h2>
+        <section class="admin-tabla">
+
+            <h2>Listado de productos</h2>
+
+            <a href="admin-producto-form.html" class="boton">Nuevo producto</a>
+
+            <table id="tablaProductosAdmin">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoProductosAdmin"></tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
