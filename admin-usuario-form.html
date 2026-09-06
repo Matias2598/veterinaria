@@ -1,132 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Nuevo Usuario | Veterinaria San Marcos</title>
-
+    <title>Usuarios | Panel administrador</title>
     <link rel="stylesheet" href="css/style.css">
-
-
-    <script src="funciones/nuevo-usuario.js" defer></script>
+    <script src="funciones-admin/regiones-data.js" defer></script>
 </head>
+<body class="admin-layout">
+    <aside class="admin-sidebar">
 
-<body>
+        <h2 class="admin-logo">🐾 Vet. San Marcos</h2>
 
-    <header>
-        <h1>🐾 Administración Veterinaria San Marcos</h1>
-
-        <nav>
-            <a href="admin-home.html">Inicio</a>
-            <a href="admin-productos.html">Productos</a>
-            <a href="admin-usuarios.html">Usuarios</a>
-            <a href="index.html">Volver a la tienda</a>
+        <nav class="admin-nav">
+            <a href="index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="usuarios.html" class="activo">Usuarios</a>
         </nav>
-    </header>
 
-    <main>
+        <a href="../index.html" class="admin-salir">← Volver a la tienda</a>
 
-        <section class="formulario-contenedor">
+    </aside>
+    <section class="admin-contenido">
 
-            <h2>Crear nuevo usuario</h2>
+        <header class="admin-topbar">
+            <h1>Usuarios</h1>
+        </header>
 
-            <p>Completa los datos para registrar un nuevo usuario.</p>
+        <main class="admin-main">
 
-            <form id="formUsuario" novalidate>
+            <section class="admin-tabla">
 
-                <div class="campo">
-                    <label for="nombre">Nombre completo</label>
+                <h2>Listado de usuarios</h2>
 
-                    <input
-                        type="text"
-                        id="nombre"
-                        placeholder="Ej: Juan Pérez"
-                    >
+                <table id="tablaUsuariosAdmin">
 
-                    <p class="error" id="errorNombre"></p>
-                </div>
+                    <thead>
+                        <tr>
+                            <th>RUN</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Tipo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody id="cuerpoTablaUsuariosAdmin"></tbody>
+                </table>
+            </section>
+            
+            <section class="admin-formulario">
 
-                <div class="campo">
-                    <label for="correo">Correo electrónico</label>
+                <h2 id="tituloFormularioUsuario">Nuevo usuario</h2>
 
-                    <input
-                        type="email"
-                        id="correo"
-                        placeholder="Ej: juan@gmail.com"
-                    >
+                <form id="formUsuario" novalidate>
 
-                    <p class="error" id="errorCorreo"></p>
-                </div>
+                    <fieldset class="campo">
 
-                <div class="campo">
-                    <label for="password">Contraseña</label>
+                        <label for="run">RUN (sin puntos ni guion)</label>
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Ingrese una contraseña"
-                    >
+                        <input type="text" id="run" placeholder="19011022K" minlength="7" maxlength="9">
 
-                    <p class="error" id="errorPassword"></p>
-                </div>
+                        <p class="error" id="errorRun"></p>
 
-                <div class="campo">
-                    <label for="confirmarPassword">
-                        Confirmar contraseña
-                    </label>
+                    </fieldset>
 
-                    <input
-                        type="password"
-                        id="confirmarPassword"
-                        placeholder="Repita la contraseña"
-                    >
 
-                    <p class="error" id="errorConfirmarPassword"></p>
-                </div>
+                    <fieldset class="campo">
+                        <label for="nombreUsuario">Nombre</label>
+                        <input type="text" id="nombreUsuario" maxlength="50">
+                        <p class="error" id="errorNombreUsuario"></p>
+                    </fieldset>
 
-                <div class="campo">
-                    <label for="rol">Rol del usuario</label>
 
-                    <select id="rol">
+                    <fieldset class="campo">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" maxlength="100">
+                        <p class="error" id="errorApellidos"></p>
+                    </fieldset>
 
-                        <option value="">
-                            Seleccione un rol
-                        </option>
+                    <fieldset class="campo">
+                        <label for="correoUsuario">Correo electrónico</label>
+                        <input type="email" id="correoUsuario" maxlength="100">
+                        <p class="error" id="errorCorreoUsuario"></p>
+                    </fieldset>
 
-                        <option value="cliente">
-                            Cliente
-                        </option>
 
-                        <option value="admin">
-                            Administrador
-                        </option>
+                    <fieldset class="campo">
+                        <label for="fechaNacimiento">Fecha de nacimiento (opcional)</label>
+                        <input type="date" id="fechaNacimiento">
+                    </fieldset>
 
-                    </select>
 
-                    <p class="error" id="errorRol"></p>
-                </div>
+                    <fieldset class="campo">
 
-                <button type="submit">
-                    Crear usuario
-                </button>
+                        <label for="tipoUsuario">Tipo de usuario</label>
+                        <select id="tipoUsuario">
+                            <option value="">Seleccione</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Cliente">Cliente</option>
+                        </select>
+                        <p class="error" id="errorTipoUsuario"></p>
 
-                <p
-                    id="mensajeUsuario"
-                    class="mensaje-exito"
-                ></p>
+                    </fieldset>
 
-            </form>
 
-        </section>
+                    <fieldset class="campo">
 
-    </main>
+                        <label for="region">Región</label>
+                        <select id="region">
+                            <option value="">Seleccione la región</option>
+                        </select>
+                        <p class="error" id="errorRegion"></p>
+                    </fieldset>
 
-    <footer class="footer">
-        <p>© 2026 Veterinaria San Marcos</p>
-    </footer>
 
+                    <fieldset class="campo">
+
+                        <label for="comuna">Comuna</label>
+
+                        <select id="comuna">
+                            <option value="">Seleccione la comuna</option>
+                        </select>
+
+                        <p class="error" id="errorComuna"></p>
+
+                    </fieldset>
+
+
+                    <fieldset class="campo">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" maxlength="300">
+
+                        <p class="error" id="errorDireccion"></p>
+
+                    </fieldset>
+
+
+                    <button type="submit" class="boton">
+                        Guardar usuario
+                    </button>
+
+                    <button type="button" id="botonCancelarUsuario" class="boton" hidden>
+                        Cancelar edición
+                    </button>
+
+                    <p class="mensaje-exito" id="mensajeUsuario"></p>
+
+                </form>
+
+            </section>
+        </main>   
+    </section>    
+    
 </body>
-
 </html>
