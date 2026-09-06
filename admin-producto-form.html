@@ -1,170 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Editar Producto | Veterinaria San Marcos</title>
-
+    <title>Administrador - Veterinaria San Marcos</title>
     <link rel="stylesheet" href="css/style.css">
-    
-
-    <script src="funciones/editar-producto.js" defer></script>
+    <script src="funciones/funciones.js" defer></script>
 </head>
-
 <body>
-
-    <header>
-        <h1>🐾 Administración Veterinaria San Marcos</h1>
-
-        <nav>
-            <a href="admin-home.html">Inicio</a>
-            <a href="admin-productos.html">Productos</a>
-            <a href="admin-usuarios.html">Usuarios</a>
-            <a href="index.html">Volver a la tienda</a>
+    <header class="admin-header">
+        <h1>Panel Administrador</h1>
+        <nav class="admin-nav">
+                <a href="admin-home.html">Inicio</a>
+                <a href="admin-productos.html" class="activo">Productos</a>
+                <a href="admin-usuarios.html">Usuarios</a>
         </nav>
     </header>
-
     <main>
+        <section id="form-producto">
+            <h2>Nuevo producto</h2>
+            <form id="formulario-producto" novalidate>
+                <label for="codigo">Código producto</label>
+                <input type="text" id="codigo" required>
+                <span class="error"></span>
 
-        <section class="formulario-contenedor">
+                <label for="nombre-producto">Nombre</label>
+                <input type="text" id="nombre-producto" required>
+                <span class="error"></span>
 
-            <h2>Editar producto</h2>
+                <label for="descripcion">Descripción (opcional)</label>
+                <textarea id="descripcion"></textarea>
 
-            <p>Modifica la información del producto seleccionado.</p>
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" min="0" step="1" required>
+                <span class="error"></span>
 
-            <form id="formProducto" novalidate>
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" min="0" step="1" required>
+                <span class="error"></span>
 
-                <div class="campo">
-                    <label for="codigo">Código del producto</label>
+                <label for="stock-critico">Stock crítico (opcional)</label>
+                <input type="number" id="stock-critico" min="0" step="1">
 
-                    <input
-                        type="text"
-                        id="codigo"
-                        placeholder="Ej: PROD001"
-                    >
+                <label for="categoria">Categoría</label>
+                <select id="categoria" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="consultas">Consultas</option>
+                    <option value="vacunacion">Vacunación</option>
+                    <option value="cirugia">Cirugía</option>
+                    <option value="desparasitacion">Desparasitación</option>
+                    <option value="examenes">Exámenes</option>
+                </select>
+                <span class="error"></span>
 
-                    <p class="error" id="errorCodigo"></p>
-                </div>
+                <label for="imagen">Imagen (opcional)</label>
+                <input type="file" id="imagen">
 
-
-                <div class="campo">
-                    <label for="nombre">Nombre del producto</label>
-
-                    <input
-                        type="text"
-                        id="nombre"
-                        placeholder="Ej: Alimento para perros"
-                    >
-
-                    <p class="error" id="errorNombre"></p>
-                </div>
-
-
-                <div class="campo">
-                    <label for="descripcion">Descripción</label>
-
-                    <textarea
-                        id="descripcion"
-                        rows="5"
-                        placeholder="Descripción del producto"
-                    ></textarea>
-
-                    <p class="error" id="errorDescripcion"></p>
-                </div>
-
-
-                <div class="campo">
-                    <label for="precio">Precio</label>
-
-                    <input
-                        type="number"
-                        id="precio"
-                        min="0"
-                        placeholder="Ej: 15990"
-                    >
-
-                    <p class="error" id="errorPrecio"></p>
-                </div>
-
-
-                <div class="campo">
-                    <label for="stock">Stock disponible</label>
-
-                    <input
-                        type="number"
-                        id="stock"
-                        min="0"
-                        placeholder="Ej: 20"
-                    >
-
-                    <p class="error" id="errorStock"></p>
-                </div>
-
-
-                <div class="campo">
-                    <label for="stockCritico">Stock crítico</label>
-
-                    <input
-                        type="number"
-                        id="stockCritico"
-                        min="0"
-                        placeholder="Ej: 5"
-                    >
-
-                    <p class="error" id="errorStockCritico"></p>
-                </div>
-
-
-                <div class="campo">
-                    <label for="categoria">Categoría</label>
-
-                    <select id="categoria">
-
-                        <option value="">Seleccione una categoría</option>
-
-                        <option value="alimentos">
-                            Alimentos
-                        </option>
-
-                        <option value="accesorios">
-                            Accesorios
-                        </option>
-
-                        <option value="higiene">
-                            Higiene y cuidado
-                        </option>
-
-                        <option value="juguetes">
-                            Juguetes
-                        </option>
-
-                    </select>
-
-                    <p class="error" id="errorCategoria"></p>
-                </div>
-
-
-                <button type="submit">
-                    Guardar cambios
-                </button>
-
-                <p
-                    id="mensajeProducto"
-                    class="mensaje-exito"
-                ></p>
-
+                <button type="submit">Guardar producto</button>
+                <p id="mensaje-confirmacion"></p>
             </form>
-
         </section>
-
     </main>
-
-    <footer class="footer">
+    <footer>
         <p>© 2026 Veterinaria San Marcos</p>
     </footer>
-
 </body>
-
 </html>
