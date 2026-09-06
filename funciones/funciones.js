@@ -478,7 +478,7 @@ if (formContacto) {
 
     const errorNombreContacto = document.getElementById("errorNombre");
     const errorCorreoContacto = document.getElementById("errorCorreo");
-    const errorMensajeContacto = document.getElementById("errorMensaje");
+    const errorComentarioContacto = document.getElementById("errorComentario");
 
     const mensajeContacto = document.getElementById("mensajeContacto");
 
@@ -488,7 +488,7 @@ if (formContacto) {
 
         errorNombreContacto.textContent = "";
         errorCorreoContacto.textContent = "";
-        errorMensajeContacto.textContent = "";
+        errorComentarioContacto.textContent = "";
         mensajeContacto.textContent = "";
 
         let valido = true;
