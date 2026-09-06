@@ -1,33 +1,284 @@
+/*----------------------------------------------------------------------------------------Matias*/
 /*Para todas las paginas*/
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: system-ui, Arial, sans-serif;
-  background: rgb(39, 161, 110);
-  color: black;
-  line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background: #00c785;
+    color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 25px;
+    flex: 1;
 }
 
-section h2 {
-  color: white;
-  margin-bottom: 16px;
-  -webkit-text-stroke: 1px black;
+
+/*Para los <header> y <nav>*/
+header {
+    background:white;
+    color: black;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
+header nav a {
+    color: black;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+.activo {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+/*Para el header y nav del Administrador*/
+.admin-header {
+    background: white;
+    color: black;
+    padding: 20px;
+}
+
+.admin-header h1 {
+    margin-bottom: 15px;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-nav a {
+    color: black;
+    text-decoration: none;
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+}
+
+
+/*Para index*/
+.hero {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.hero h2 {
+    color: #005f3f;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    margin-bottom: 15px;
+}
+
+.hero img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.hero a,
+.boton {
+    display: inline-block;
+    background: #005f3f;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 6px;
+}
+
+.hero a:hover,
+.boton:hover {
+    background: #005f3f;
+}
+
+
+/*Para lista <ul><li> */
+ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+li {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+li img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+
+/*Para blogs*/
+.datos {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.datos img {
+    width: 100%;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+
+/*Para detalle de blog*/
+#detalle-blog {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#detalle-blog img {
+    width: 100%;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+
+/*Para formularios <form>*/
+form {
+    background: white;
+    max-width: 500px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+
+/*Para cualquier formularios*/
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.campo-error {
+    border: 2px solid red;
+    background: white;
+}
+
+
+/*Para botones*/
+button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: #005f3f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #005f3f;
+}
+
+
+/*Para tablas (admin-usuarios.html)*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #005f3f;
+    color: white;
+}
+
+
+/*Para footer*/
 footer {
-  background: white;
-  color: black;
-  text-align: center;
-  padding: 14px;
-  margin-top: 40px;
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
 }
+
+
+/*Para celulares*/
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    header nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    ul {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 15px;
+    }
+}
+/*----------------------------------------------------------------------------------------Matias*/
+/*----------------------------------------------------------------------------------------*/
