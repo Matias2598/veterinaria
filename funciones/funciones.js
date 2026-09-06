@@ -55,7 +55,7 @@ if(registro){
     
     if (correo.value.trim() !== '' && !patronCorreo.test(correo.value.trim())) {
       correo.classList.add('campo-error');
-      correo.nextElementSibling.textContent = 'Correo inválido, debe ser @hotmail.com o @gmail.com';
+      correo.nextElementSibling.textContent = 'Correo inválido, debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com';
       formularioValido = false;
     }
 
