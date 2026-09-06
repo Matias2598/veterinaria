@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios | panel de administración</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="funciones/funciones.js" defer></script>
+</head>
+<body>
+    <header class="admin-topbar">
+        <h1>🐾 Veterinaria San Marcos</h1>
+        <aside class="admin-sidebar">
+            <nav>
+                <a href="admin-home.html">Inicio</a>
+                <a href="admin-productos.html">Productos</a>
+                <a href="admin-usuarios.html" class="activo">Usuarios</a>
+            </nav>
+
+            <a href="index.html" class="salir">← Volver a la tienda</a>
+        </aside>
+    </header>
+    <main>
+        <h2>Usuarios</h2>
+        <section class="admin-tabla">
+
+            <h2>Listado de usuarios</h2>
+
+            <a href="admin-usuario-form.html" class="boton">Nuevo usuario</a>
+
+            <table id="tablaUsuariosAdmin">
+                <thead>
+                    <tr>
+                        <th>RUN</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Tipo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTablaUsuariosAdmin"></tbody>
+            </table>
+
+        </section>
+    </main>
+</body>
+</html>
