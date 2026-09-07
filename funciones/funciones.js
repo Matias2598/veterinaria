@@ -444,7 +444,7 @@ if (formUsuario) {
     });
 }
 
-/* ---- funciones del carrito, compartidas ---- */
+/* funciones del carrito, compartidas */
 
 function obtenerCarrito() {
     const datos = localStorage.getItem("carritoVeterinaria");
