@@ -126,6 +126,7 @@ if (formProducto) {
 
 const formLogin = document.getElementById("formLogin");
 
+if(formLogin) {
 const correo = document.getElementById("correo");
 const password = document.getElementById("password");
 
@@ -224,6 +225,7 @@ formLogin.addEventListener("submit", function (evento) {
 
 });
 
+}
 const productos = [
 
     {
@@ -300,5 +302,385 @@ function mostrarProductos() {
 
 }
 
+if (listaProductos) {
+    mostrarProductos();
+}
 
-mostrarProductos();
+//====================================Esteban
+//Formulario de usuario admin
+const formUsuario = document.getElementById("formUsuario");
+
+if (formUsuario) {
+
+    const run = document.getElementById("run");
+    const nombreUsuario = document.getElementById("nombreUsuario");
+    const apellidos = document.getElementById("apellidos");
+    const correoUsuario = document.getElementById("correoUsuario");
+    const tipoUsuario = document.getElementById("tipoUsuario");
+    const region = document.getElementById("region");
+    const comuna = document.getElementById("comuna");
+    const direccion = document.getElementById("direccion");
+
+    const errorRun = document.getElementById("errorRun");
+    const errorNombreUsuario = document.getElementById("errorNombreUsuario");
+    const errorApellidos = document.getElementById("errorApellidos");
+    const errorCorreoUsuario = document.getElementById("errorCorreoUsuario");
+    const errorTipoUsuario = document.getElementById("errorTipoUsuario");
+    const errorRegion = document.getElementById("errorRegion");
+    const errorComuna = document.getElementById("errorComuna");
+    const errorDireccion = document.getElementById("errorDireccion");
+
+    const mensajeUsuario = document.getElementById("mensajeUsuario");
+
+    const comunasPorRegion = {
+        Metropolitana: ["Santiago", "San Bernardo", "Puente Alto", "Maipú"],
+        Valparaíso: ["Valparaíso", "Viña del Mar", "Quilpué"],
+        Biobío: ["Concepción", "Talcahuano", "Los Ángeles"]
+    };
+
+        Object.keys(comunasPorRegion).forEach(function (nombreRegion) {
+        const opcion = document.createElement("option");
+        opcion.value = nombreRegion;
+        opcion.textContent = nombreRegion;
+        region.appendChild(opcion);
+    });
+
+    region.addEventListener("change", function () {
+
+        const opciones = comunasPorRegion[region.value];
+
+        comuna.innerHTML = '<option value="">Seleccione la comuna</option>';
+
+        if (!opciones) return;
+
+        opciones.forEach(function (nombreComuna) {
+            const opcion = document.createElement("option");
+            opcion.value = nombreComuna;
+            opcion.textContent = nombreComuna;
+            comuna.appendChild(opcion);
+        });
+    });
+
+    function validarRun(valor) {
+
+        const limpio = valor.toUpperCase().trim();
+
+        if (!/^[0-9]{6,8}[0-9K]$/.test(limpio)) return false;
+
+        const cuerpo = limpio.slice(0, -1);
+        const dv = limpio.slice(-1);
+
+        let suma = 0;
+        let multiplicador = 2;
+
+        for (let i = cuerpo.length - 1; i >= 0; i--) {
+            suma += Number(cuerpo[i]) * multiplicador;
+            multiplicador = multiplicador < 7 ? multiplicador + 1 : 2;
+        }
+
+        const resto = 11 - (suma % 11);
+        const dvEsperado = resto === 11 ? "0" : resto === 10 ? "K" : String(resto);
+
+        return dv === dvEsperado;
+    }
+
+    formUsuario.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        [errorRun, errorNombreUsuario, errorApellidos, errorCorreoUsuario,
+        errorTipoUsuario, errorRegion, errorComuna, errorDireccion]
+            .forEach(el => el.textContent = "");
+
+        mensajeUsuario.textContent = "";
+
+        let valido = true;
+
+        if (!validarRun(run.value)) {
+            errorRun.textContent = "RUN inválido. Sin puntos ni guion, ej: 19011022K.";
+            valido = false;
+        }
+
+        if (nombreUsuario.value.trim() === "" || nombreUsuario.value.length > 50) {
+            errorNombreUsuario.textContent = "El nombre es obligatorio (máx. 50 caracteres).";
+            valido = false;
+        }
+
+        if (apellidos.value.trim() === "" || apellidos.value.length > 100) {
+            errorApellidos.textContent = "Los apellidos son obligatorios (máx. 100 caracteres).";
+            valido = false;
+        }
+
+        if (correoUsuario.value.trim() === "") {
+            errorCorreoUsuario.textContent = "El correo es obligatorio.";
+            valido = false;
+        }
+
+        if (tipoUsuario.value === "") {
+            errorTipoUsuario.textContent = "Seleccione un tipo de usuario.";
+            valido = false;
+        }
+
+        if (region.value === "") {
+            errorRegion.textContent = "Seleccione una región.";
+            valido = false;
+        }
+
+        if (comuna.value === "") {
+            errorComuna.textContent = "Seleccione una comuna.";
+            valido = false;
+        }
+
+        if (direccion.value.trim() === "" || direccion.value.length > 300) {
+            errorDireccion.textContent = "La dirección es obligatoria (máx. 300 caracteres).";
+            valido = false;
+        }
+
+        if (valido) {
+            mensajeUsuario.textContent = "Usuario guardado correctamente.";
+            mensajeUsuario.style.color = "green";
+            formUsuario.reset();
+        }
+    });
+}
+
+/* funciones del carrito, compartidas */
+
+function obtenerCarrito() {
+    const datos = localStorage.getItem("carritoVeterinaria");
+    return datos ? JSON.parse(datos) : [];
+}
+
+function guardarCarrito(carrito) {
+    localStorage.setItem("carritoVeterinaria", JSON.stringify(carrito));
+}
+
+function agregarAlCarrito(producto) {
+
+    const carrito = obtenerCarrito();
+    const existente = carrito.find(item => item.id === producto.id);
+
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        carrito.push({
+            id: producto.id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            imagen: producto.imagen,
+            cantidad: 1
+        });
+    }
+
+    guardarCarrito(carrito);
+}
+
+/* carrito de compras */
+
+const tablaCarrito = document.getElementById("tablaCarrito");
+
+if (tablaCarrito) {
+
+    const cuerpoTablaCarrito = document.getElementById("cuerpoTablaCarrito");
+    const mensajeVacio = document.getElementById("mensajeVacio");
+    const totalCarrito = document.getElementById("totalCarrito");
+
+    const formCupon = document.getElementById("formCupon");
+    const cupon = document.getElementById("cupon");
+    const mensajeCupon = document.getElementById("mensajeCupon");
+
+    const botonPagar = document.getElementById("botonPagar");
+
+    const cuponesValidos = { MASCOTA10: 0.10, VETSANMARCOS: 0.15 };
+
+    let descuentoAplicado = 0;
+
+    function renderizarCarrito() {
+
+        const carrito = obtenerCarrito();
+
+        cuerpoTablaCarrito.innerHTML = "";
+
+        if (carrito.length === 0) {
+
+            tablaCarrito.hidden = true;
+            mensajeVacio.hidden = false;
+
+            actualizarTotal(carrito);
+            return;
+        }
+
+        tablaCarrito.hidden = false;
+        mensajeVacio.hidden = true;
+
+        carrito.forEach(function (item) {
+
+            const fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td>${item.nombre}</td>
+                <td>$${item.precio.toLocaleString("es-CL")}</td>
+                <td>
+                    <button type="button" class="restar" data-id="${item.id}">-</button>
+                    <span>${item.cantidad}</span>
+                    <button type="button" class="sumar" data-id="${item.id}">+</button>
+                </td>
+                <td>$${(item.precio * item.cantidad).toLocaleString("es-CL")}</td>
+                <td><button type="button" class="eliminar" data-id="${item.id}">Eliminar</button></td>
+            `;
+
+            cuerpoTablaCarrito.appendChild(fila);
+        });
+
+        actualizarTotal(carrito);
+    }
+
+    function actualizarTotal(carrito) {
+
+        const subtotal = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
+        const total = subtotal - subtotal * descuentoAplicado;
+
+        totalCarrito.textContent = "$" + Math.round(total).toLocaleString("es-CL");
+    }
+
+    cuerpoTablaCarrito.addEventListener("click", function (evento) {
+
+        const boton = evento.target;
+        const id = Number(boton.dataset.id);
+
+        if (!id) return;
+
+        const carrito = obtenerCarrito();
+        const item = carrito.find(producto => producto.id === id);
+
+        if (!item) return;
+
+        if (boton.classList.contains("sumar")) {
+
+            item.cantidad += 1;
+
+        } else if (boton.classList.contains("restar")) {
+
+            item.cantidad -= 1;
+
+            if (item.cantidad <= 0) {
+                carrito.splice(carrito.indexOf(item), 1);
+            }
+
+        } else if (boton.classList.contains("eliminar")) {
+
+            carrito.splice(carrito.indexOf(item), 1);
+        }
+
+        guardarCarrito(carrito);
+        renderizarCarrito();
+    });
+
+    formCupon.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        mensajeCupon.textContent = "";
+
+        const codigo = cupon.value.trim().toUpperCase();
+
+        if (codigo === "") {
+            mensajeCupon.textContent = "Ingresa un código de cupón.";
+            return;
+        }
+
+        if (cuponesValidos[codigo] === undefined) {
+
+            descuentoAplicado = 0;
+            mensajeCupon.textContent = "El cupón ingresado no es válido.";
+
+        } else {
+
+            descuentoAplicado = cuponesValidos[codigo];
+            mensajeCupon.style.color = "green";
+            mensajeCupon.textContent = `Cupón aplicado: ${descuentoAplicado * 100}% de descuento.`;
+        }
+
+        actualizarTotal(obtenerCarrito());
+    });
+
+    botonPagar.addEventListener("click", function () {
+
+        const carrito = obtenerCarrito();
+
+        if (carrito.length === 0) {
+            alert("Tu carrito está vacío.");
+            return;
+        }
+
+        alert("¡Compra realizada con éxito! Gracias por tu preferencia.");
+
+        guardarCarrito([]);
+        descuentoAplicado = 0;
+        cupon.value = "";
+        mensajeCupon.textContent = "";
+
+        renderizarCarrito();
+    });
+
+    renderizarCarrito();
+}
+
+/* contacto */
+
+const formContacto = document.getElementById("formContacto");
+
+if (formContacto) {
+
+    const nombreContacto = document.getElementById("nombre");
+    const correoContacto = document.getElementById("correo");
+    const comentarioContacto = document.getElementById("comentario");
+
+    const errorNombreContacto = document.getElementById("errorNombre");
+    const errorCorreoContacto = document.getElementById("errorCorreo");
+    const errorComentarioContacto = document.getElementById("errorComentario");
+
+    const mensajeContacto = document.getElementById("mensajeContacto");
+
+    formContacto.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        errorNombreContacto.textContent = "";
+        errorCorreoContacto.textContent = "";
+        errorComentarioContacto.textContent = "";
+        mensajeContacto.textContent = "";
+
+        let valido = true;
+
+        if (nombreContacto.value.trim() === "") {
+            errorNombreContacto.textContent = "El nombre es obligatorio.";
+            valido = false;
+        } else if (nombreContacto.value.length > 100) {
+            errorNombreContacto.textContent = "Máximo 100 caracteres.";
+            valido = false;
+        }
+
+        if (correoContacto.value.trim() === "") {
+            errorCorreoContacto.textContent = "El correo es obligatorio.";
+            valido = false;
+        } else if (correoContacto.value.length > 100) {
+            errorCorreoContacto.textContent = "Máximo 100 caracteres.";
+            valido = false;
+        }
+
+        if (comentarioContacto.value.trim() === "") {
+            errorComentarioContacto.textContent = "El comentario es obligatorio.";
+            valido = false;
+        } else if (comentarioContacto.value.length > 500) {
+            errorComentarioContacto.textContent = "Máximo 500 caracteres.";
+            valido = false;
+        }
+
+        if (valido) {
+            mensajeContacto.textContent = "Tu mensaje fue enviado correctamente.";
+            mensajeContacto.style.color = "green";
+            formContacto.reset();
+        }
+    });
+}
