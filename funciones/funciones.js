@@ -481,6 +481,7 @@ const tablaCarrito = document.getElementById("tablaCarrito");
 
 if (tablaCarrito) {
 
+    const mensajePago = document.getElementById("mensajePago");
     const cuerpoTablaCarrito = document.getElementById("cuerpoTablaCarrito");
     const mensajeVacio = document.getElementById("mensajeVacio");
     const totalCarrito = document.getElementById("totalCarrito");
@@ -604,16 +605,22 @@ if (tablaCarrito) {
         actualizarTotal(obtenerCarrito());
     });
 
+
     botonPagar.addEventListener("click", function () {
 
         const carrito = obtenerCarrito();
 
+        mensajePago.textContent = "";
+
         if (carrito.length === 0) {
-            alert("Tu carrito está vacío.");
+
+            mensajePago.textContent = "Tu carrito está vacío.";
+            mensajePago.style.color = "red";
             return;
         }
 
-        alert("¡Compra realizada con éxito! Gracias por tu preferencia.");
+        mensajePago.textContent = "¡Compra realizada con éxito! Gracias por tu preferencia.";
+        mensajePago.style.color = "green";
 
         guardarCarrito([]);
         descuentoAplicado = 0;
