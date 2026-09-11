@@ -455,24 +455,145 @@ function guardarCarrito(carrito) {
     localStorage.setItem("carritoVeterinaria", JSON.stringify(carrito));
 }
 
-function agregarAlCarrito(producto) {
+function agregarAlCarrito(producto, cantidad = 1) {
 
     const carrito = obtenerCarrito();
     const existente = carrito.find(item => item.id === producto.id);
 
     if (existente) {
-        existente.cantidad += 1;
+        existente.cantidad += cantidad;
     } else {
         carrito.push({
             id: producto.id,
             nombre: producto.nombre,
             precio: producto.precio,
             imagen: producto.imagen,
-            cantidad: 1
+            cantidad: cantidad
         });
     }
 
     guardarCarrito(carrito);
+}
+
+/* ---- detalle de producto ---- */
+
+const detalleProducto = document.getElementById("detalleProducto");
+
+if (detalleProducto) {
+
+    const parametros = new URLSearchParams(window.location.search);
+    const idProducto = Number(parametros.get("id"));
+
+    const productoActual = productos.find(item => item.id === idProducto);
+
+    const migaNombre = document.getElementById("migaNombre");
+    const imagenProducto = document.getElementById("imagenProducto");
+    const nombreProducto = document.getElementById("nombreProducto");
+    const precioProducto = document.getElementById("precioProducto");
+    const subtotalProducto = document.getElementById("subtotalProducto");
+    const descripcionProducto = document.getElementById("descripcionProducto");
+
+    const formAgregarCarrito = document.getElementById("formAgregarCarrito");
+    const cantidad = document.getElementById("cantidad");
+    const errorCantidad = document.getElementById("errorCantidad");
+    const mensajeAgregado = document.getElementById("mensajeAgregado");
+
+    const listaRelacionados = document.getElementById("listaRelacionados");
+
+    if (!productoActual) {
+
+        detalleProducto.innerHTML = "<p>No encontramos el producto que buscas.</p>";
+
+    } else {
+
+        // --- Mostrar el detalle ---
+
+        if (migaNombre) migaNombre.textContent = productoActual.nombre;
+
+        imagenProducto.src = productoActual.imagen;
+        imagenProducto.alt = productoActual.nombre;
+
+        imagenProducto.addEventListener("error", function () {
+            imagenProducto.src = "imagenes/inicio.jpg";
+        });
+
+        nombreProducto.textContent = productoActual.nombre;
+
+        precioProducto.textContent =
+            "$" + productoActual.precio.toLocaleString("es-CL") + " c/u";
+
+        descripcionProducto.textContent =
+            productoActual.descripcion || "Producto de calidad para el cuidado de tu mascota.";
+
+
+        // --- Subtotal en vivo según la cantidad ---
+
+        function actualizarSubtotal() {
+
+            const cantidadElegida = Number(cantidad.value) || 0;
+            const subtotal = productoActual.precio * cantidadElegida;
+
+            subtotalProducto.textContent =
+                cantidadElegida > 0
+                    ? "Subtotal: $" + subtotal.toLocaleString("es-CL"): "";
+        }
+
+        actualizarSubtotal();
+
+        cantidad.addEventListener("input", actualizarSubtotal);
+
+
+        // --- Agregar al carrito, con validación de cantidad ---
+
+        formAgregarCarrito.addEventListener("submit", function (evento) {
+
+            evento.preventDefault();
+
+            errorCantidad.textContent = "";
+            mensajeAgregado.textContent = "";
+
+            const cantidadElegida = Number(cantidad.value);
+
+            if (!Number.isInteger(cantidadElegida) || cantidadElegida < 1) {
+
+                errorCantidad.textContent =
+                    "Ingrese una cantidad válida (número entero, mínimo 1).";
+
+                return;
+            }
+
+            agregarAlCarrito(productoActual, cantidadElegida);
+
+            mensajeAgregado.textContent = "Producto añadido al carrito. Redirigiendo...";
+            mensajeAgregado.style.color = "green";
+
+            setTimeout(function () {
+                window.location.href = "carrito.html";
+            }, 900);
+        });
+
+
+        // --- Productos relacionados (máximo 3) ---
+
+        productos
+            .filter(item => item.id !== idProducto)
+            .slice(0, 3)
+            .forEach(function (item) {
+
+                const elemento = document.createElement("li");
+                elemento.classList.add("producto-card");
+
+                elemento.innerHTML = `
+                    <a href="detalle-producto.html?id=${item.id}">
+                        <img src="${item.imagen}" alt="${item.nombre}">
+                        <h3>${item.nombre}</h3>
+                        <p class="precio">$${item.precio.toLocaleString("es-CL")}</p>
+                    </a>
+                `;
+
+                listaRelacionados.appendChild(elemento);
+            });
+    }
 }
 
 /* carrito de compras */
